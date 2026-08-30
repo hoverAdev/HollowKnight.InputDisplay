@@ -20,7 +20,7 @@ jobs:
 
       - name: Fetch API files
         run: |
-          wget https://github.com/hk-modding/api/releases/latest/download/ModdingApiWin.zip -O API.zip
+          wget https://github.com/hk-modding/api/releases/download/1.5.78.11833-77/moddingapi.v77.windows.zip -O API.zip
           unzip -o API.zip -d References
           
       - name: Fetch a dependency
