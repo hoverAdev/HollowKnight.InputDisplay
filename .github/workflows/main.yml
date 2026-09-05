@@ -13,31 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - name: Fetch Unity Engine modules
-        run: |
-          wget https://files.catbox.moe/i4sdl6.zip -O UnityModules.zip
-          unzip UnityModules.zip -d References
-
-      - name: Fetch API files
-        run: |
-          wget https://github.com/hk-modding/api/releases/download/1.5.78.11833-77/moddingapi.v77.windows.zip -O API.zip
-          unzip -o API.zip -d References
+      - name: Setup HK API
+        uses: BadMagic100/setup-hk@v3.0.2
+        with:
+          apiPath: References
+          dependencyFilePath: ModDependencies.txt
           
-      - name: Fetch a dependency
-        run: |
-          wget https://github.com/BadMagic100/HollowKnight.MagicUI/releases/download/v1.10.9277.8364/MagicUI.zip -O MagicUI.zip
-          unzip -o MagicUI.zip -d References
-
-      # - name: Fetch a dependency
-      #   run: |
-      #     wget {dependencyLink} -O {dependencyName}.zip
-      #     unzip -o {dependencyName}.zip -d References
-          
-      - name: Setup MSBuild
-        run: sudo apt-get install -y nuget mono-devel mono-xbuild
+      - name: Setup .NET
+          uses: actions/s
 
       - name: Restore packages
-        run: nuget restore InputDisplay.csproj
+        run: dotnet restore InputDisplay.csproj
 
       - name: Build project
         run: dotnet build --configuration Release
